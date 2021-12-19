@@ -33,3 +33,33 @@ class User(BaseModel, UserMixin):
 
 if __name__ == '__main__':
     db.create_all()
+
+    # users = [{
+    #     "name": "Ad",
+    #     "username": "admin123123",
+    #     "password": "123123",
+    #     "email": "admin@gmail.com",
+    #     "avatar": "image/logo.jpg",
+    #     "user_role": "ADMIN"
+    # }, {
+    #     "name": "Anh",
+    #     "username": "AnhAnh",
+    #     "password": "123123",
+    #     "email": "anh@gmail.com",
+    #     "avatar": "image/logo.jpg",
+    #     "user_role": "USER"
+    # }, {
+    #     "name": "Bảo",
+    #     "username": "Bao",
+    #     "password": "123",
+    #     "email": "bao@gmail.com",
+    #     "avatar": "image/logo.jpg",
+    #     "user_role": "USER"
+    # }]
+    #
+    # for p in users:
+    #     u = User(name=p['name'], username=p['username'], password=p['password'],
+    #              email=p['email'], avatar=p['avatar'], user_role=p['user_role'])
+    #     db.session.add(u)
+    #
+    # db.session.commit()
