@@ -1,0 +1,153 @@
+html {
+  height: 100%;
+}
+body {
+  position:relative;
+  margin:0;
+  padding:0;
+  font-family: sans-serif;
+  background: linear-gradient(#141e30, #243b55);
+  min-height:100vh;
+
+}
+.container_header{
+    margin-top: 100px;
+}
+.login-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  padding: 40px;
+  transform: translate(-50%, -50%);
+  background: rgba(0,0,0,.5);
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0,0,0,.6);
+  border-radius: 10px;
+}
+.register-box{
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    width: 400px;
+    padding: 10px 40px;
+    transform: translate(-55%, -50%);
+    background: rgba(0,0,0,.5);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgb(0 0 0 / 60%);
+    border-radius: 10px;
+    }
+h2 {
+  margin: 0 0 30px;
+  padding: 0;
+  color: #fff;
+  text-align: center;
+}
+
+.user-box {
+  position: relative;
+}
+
+.user-box input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid #fff;
+  outline: none;
+  background: transparent;
+}
+.user-box label {
+  position: absolute;
+  top:0;
+  left: 0;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  pointer-events: none;
+  transition: .5s;
+}
+
+.user-box input:focus ~ label,
+.user-box input:valid ~ label {
+  top: -20px;
+  left: 0;
+  color: #03e9f4;
+  font-size: 12px;
+}
+form .btn{
+  position: relative;
+  display: inline-block;
+  width:100%;
+  padding: 10px 20px;
+  color: #03e9f4;
+  font-size: 16px;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: .5s;
+  margin: 40px 0 20px;
+  letter-spacing: 4px
+}
+.login-box form .btn:hover{
+  background: #03e9f4;
+  color: #fff;
+  border-radius: 5px;
+}
+.btn-login{
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  color: #03e9f4;
+  font-size: 12px;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: .5s;
+  letter-spacing: 2px
+}
+.btn-login:hover{
+  background: #03e9f4;
+  color: #fff;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.btn-reg{
+    margin:0 !important;
+}
+.text{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.text p{
+    padding: 10px;
+    font-size: 10px;
+    color: #03e9f4;
+    margin: 0
+}
+.header_logo{
+    position: relative;
+    height: 30px;
+    width: 30px;
+
+}
+img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+.img_product{
+    height: 50px;
+    width: 50px;
+}
+
+.card{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+

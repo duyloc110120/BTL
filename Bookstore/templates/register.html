@@ -1,0 +1,54 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}
+Đăng Ký
+{% endblock %}
+
+
+{% block content %}
+
+{% if error_msg %}
+<div class="alert alert-danger">
+    {{ error_msg }}
+</div>
+{% endif %}
+
+
+<div class="register-box">
+  <h2>Đăng Ký</h2>
+  <form method="post" action="{{ url_for('register') }}" enctype="multipart/form-data>">
+    <div class="user-box">
+      <input type="text" name="name"  id="name" required>
+      <label for="name">Name</label>
+    </div>
+    <div class="user-box">
+      <input type="email" name="email"  id="email" required>
+      <label for="email">Email</label>
+    </div>
+    <div class="user-box">
+      <input type="text" name="username"  id="username" required>
+      <label for="username">Username</label>
+    </div>
+     <div class="user-box">
+      <input type="password" name="password" id="password" required>
+      <label for="password">Password</label>
+    </div>
+    <div class="user-box">
+      <input type="password" name="confirm" id="confirm" required>
+      <label for="confirm">Confirm Password</label>
+    </div>
+     <div class="user-box">
+      <input type="file" name="avatar" id="avatar" required>
+      <label for="avatar"></label>
+    </div>
+    <input type="submit" value="Đăng Ký" class="btn btn-reg">
+
+      <div class="text">
+      <p>Đã có tài khoản</p>
+      <a href="{{ url_for('login') }}" class="btn-login">
+       Đăng Nhập Tại Đây</a>
+    </div>
+  </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}
+Trang Chủ
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <div class="container_header">
+        <div class="row">
+            <div class="col-md-10 col-lg-8 mx-auto">
+                <div class="container">
+                    <div class="card mb-5 mt-5">
+                        <div class="card-body">
+                            <img src="{{ url_for('static', filename='image/logo.jpg') }}" class="align-items-center img_product" alt="logo" style="border: 9px solid gold; border-radius: 95em"
+                            width="100%">
+                            <br><br>
+                            <h5 class="card-title" style="color: #D1495B;">Title</h5>
+                            <p class="card-text">Info</p>
+                            <p class="card-text">Description</p>
+                            <a href="#" class="btn btn-primary">Đặt Hàng</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
