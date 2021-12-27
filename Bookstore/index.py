@@ -10,6 +10,11 @@ from Bookstore.admin import *
 def home():
     return render_template('index.html')
 
+
+@app.route('/details')
+def details():
+    return render_template('product_details.html')
+
 #
 # @app.route('/login', methods=['get', 'post'])
 # def login():

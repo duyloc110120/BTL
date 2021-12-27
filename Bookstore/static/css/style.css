@@ -5,7 +5,7 @@
 }
 body,html{
     background-color: #F8F9FA;
-    min-height:200vh;
+    min-height:100vh;
 }
 .top{
     position: fixed;
@@ -204,10 +204,10 @@ section.introduce{
 .category-product{
     margin-top: 50px;
 }
-.category-product h1.header{
+h1.header{
      font-size: 20px;
 }
-.category-product h2.header{
+h2.header{
      font-size: 20px;
 }
 .card {
@@ -291,6 +291,13 @@ a.btn.btn-warning.btn-sm.text-white {
     flex : 1;
     flex-wrap : wrap;
 }
+
+.combohot .card{
+    border: none;
+}
+.sapphathanh .card{
+    border: none;
+}
 /*CSS Footer*/
 .service p.detail {
     font-size: 12px;
@@ -331,4 +338,145 @@ footer .row a {
 
 footer .row a:hover {
     color:  #F5A623;
+}
+
+@media (max-width:767px){
+    .navbar ul li.account{
+        border-top: 1px dashed #CF111A;
+        border-bottom: 1px dashed #CF111A;
+        padding-bottom: 0.5rem;
+        margin-bottom: 0.25rem;
+    }
+    .navbar ul li.giohang{
+        border-bottom: 1px dashed #CF111A;
+        padding-bottom: 0.5rem;
+        margin-right:8px;
+    }
+    .categorycontent{
+        display: none;
+    }
+}
+
+/*=====================================================Product-details========================================================================*/
+.product-detail{
+    margin-top:80px;
+}
+
+.product-detail .product-img{
+    transition: 0.2s;
+}
+.product-detail .list-img-details {
+    height: 98px;
+}
+.products-content {
+    position: relative;
+}
+.products-content .header hr {
+    margin-top: 10px;
+}
+
+.products-content .sale .header {
+    margin-top: 5px;
+    padding: 10px 0px 2px 16px;
+    font-size: 13px;
+}
+.products-content .header h4 {
+    font-weight: 400;
+    font-size: 22px;
+    margin-bottom: 5px;
+}
+.products-content .price{
+    position: relative;
+    font-size: 17px;
+}
+.products-content .prices{
+
+    color :#333;
+}
+.products-content .price-book{
+
+    font-size: 39px;
+    color :red;
+}
+.products-content .price .unitmoney {
+    color: red;
+    font-size: 26px;
+    font-weight: bold;
+}
+.products-content .input-number .btn-spin {
+    background: white;
+    border: 1px solid #ebebeb;
+}
+.products-content .quantily label {
+    width: 101px;
+    font-size: 14px;
+    margin-top: 9px;
+}
+
+.thongtinsach a.tacgia {
+    color: #F5A623;
+    text-decoration: none;
+}
+
+.thongtinsach ul li {
+    margin-bottom: 5px;
+}
+
+.products-content .thongtinsach ul {
+    list-style: none;
+    margin-bottom: 0px;
+}
+.products-content  .thongtinsach {
+    border: 1px solid #E5E5E5;
+    border-radius: 5px;
+    padding: 13px;
+    font-size: 13px;
+}
+.products-content .sale ul {
+    list-style: none;
+}
+.products-content .sale ul li::before {
+    content: "\2022";
+    color: #F5A623;
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+    font-size:15px;
+}
+.products-content  .sale li a {
+    color: gray;
+}
+
+.products-content  .sale li {
+    margin-left: 33px;
+    margin-bottom: 5px;
+}
+
+.products-content  .sale {
+    background: #FEF6E9;
+    border: 1px solid #F5A623;
+    border-radius: 5px;
+    font-size: 13px;
+}
+
+.products-content .price {
+    margin-top: 7px;
+}
+
+.products-content .huongdanmuahang {
+    color: #F7A623;
+    font-size: 13px;
+    margin: 10px 0px;
+    display: block;
+}
+
+.products-content .nutmua {
+    background: linear-gradient(#f5a623,#fd8205);
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+}
+.products-content .nutmua:hover {
+    box-shadow: 0px 11px 20px -10px #fd8205;
 }
