@@ -1,0 +1,28 @@
+[{
+        "id": "1",
+        "name": "Lập Kế Hoạch Kinh Doanh Hiệu Quả",
+        "description": "Lập Kế Hoạch Kinh Doanh Hiệu Quả",
+        "price": "120000",
+        "image": "images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg",
+        "joined_date": "2015-12-12",
+        "quantity": "200",
+        "category_id": "1"
+    }, {
+        "id": "2",
+        "name": "Ma Bùn Lưu Manh",
+        "description": "Ma Bùn Lưu Manh",
+        "price": "150000",
+        "image": "images/ma-bun-luu-manh.jpg",
+        "joined_date": "2015-12-12",
+        "quantity": "600",
+        "category_id": "2"
+    }, {
+        "id": "3",
+        "name": "Giao dịch mọi nơi , không chỉ là ngân hàng",
+        "description": "Giao Dịnh mọi nơi , không chỉ là ngân hàng",
+        "price": "100000",
+        "image": "images/bank-4.0.jpg",
+        "joined_date": "2015-12-12",
+        "quantity": "300",
+        "category_id": "3"
+    }]

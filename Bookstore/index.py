@@ -8,7 +8,11 @@ from Bookstore.admin import *
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    cate_id = request.args.get('category_id')
+    kw = request.args.get('keyword')
+    products = utils.load_products(cate_id=cate_id, kw=kw)
+
+    return render_template('index.html', products=products)
 
 
 @app.route('/details')
