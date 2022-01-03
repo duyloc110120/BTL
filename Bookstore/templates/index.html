@@ -37,36 +37,12 @@
                     <!-- CATEGORIES -->
                     <div class="categorycontent">
                         <ul>
-                            <li> <a href="sach-kinh-te.html"> Sách Kinh Tế - Kỹ Năng</a>
+                            {% for c in categories %}
+                            <li>
+                                <a href="#">{{ c.name }}</a>
                                 <i class="fa fa-chevron-right float-right"></i>
                             </li>
-                            <li><a href="#">Sách Văn Học Việt Nam</a>
-                                <i class="fa fa-chevron-right float-right"></i>
-                            </li>
-                            <li><a href="#">Sách Văn Học Nước Ngoài</a>
-                                <i class="fa fa-chevron-right float-right"></i>
-                            </li>
-                            <li><a href="#">Sách Thiếu Nhi</a>
-                                <i class="fa fa-chevron-right float-right"></i>
-                            </li>
-                            <li><a href="#">Sách Giáo Dục - Gia Đình</a>
-                                <i class="fa fa-chevron-right float-right"></i>
-                            </li>
-                            <li><a href="#">Sách Lịch Sử</a>
-                                <i class="fa fa-chevron-right float-right"></i>
-                            </li>
-                            <li><a href="#">Sách Văn Hóa - Nghệ Thuật</a>
-                                <i class="fa fa-chevron-right float-right"></i>
-                            </li>
-                            <li><a href="#">Sách Khoa Học - Triết Học</a>
-                                <i class="fa fa-chevron-right float-right"></i>
-                            </li>
-                            <li><a href="#">Sách Tâm Linh - Tôn Giáo</a>
-                                <i class="fa fa-chevron-right float-right"></i>
-                            </li>
-                            <li><a href="#">Sách Y Học - Thực Dưỡng</a>
-                                <i class="fa fa-chevron-right float-right"></i>
-                            </li>
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>
@@ -111,32 +87,32 @@
                 <div class="row">
                     <div class="col-12 d-flex justify-content-between align-items-center pb-2 bg-transparent pt-4">
                         <h1 class="header text-uppercase" style="font-weight: 400;">SÁCH MỚI TUYỂN CHỌN</h1>
-                        <a href="#" class="btn btn-warning btn-sm text-white">Xem tất cả</a>
+                        <a href="{{ url_for('product') }}" class="btn btn-warning btn-sm text-white">Xem tất cả</a>
                     </div>
                 </div>
-{% if products %}
 
+                {% if products %}
 
                 <div class="khoisanpham" style="padding-bottom: 2rem;">
                      {% for p in products %}
                     <div class="card">
-                        <a href="{{ url_for('login') }}" class="motsanpham" style="text-decoration: none; color: black;">
+                        <a href="{{ url_for('product_detail', product_id=p.id) }}" class="motsanpham" style="text-decoration: none; color: black;">
                             <img class="card-img-top anh" src="{{ url_for('static',filename=p.image) }}"
                                 alt="{{ p.name }}">
                             <div class="card-body content mt-3">
                                 <h3 class="card-title name">{{ p.name}}</h3>
-                                <small class="actor text-muted">Brian Finch</small>
-                                <div class="price">{{ "{:,.1f}".format(p.price) }} ₫</div>
+                                <div class="price">{{ "{:,.0f}".format(p.price) }} ₫</div>
                                 <a class="btn btn-cart">Đặt Hàng</a>
                             </div>
                         </a>
                     </div>
                     {% endfor %}
                 </div>
+                {% else %}
+                    <p><i>Không có sản phẩm nào</i></p>
+                {% endif %}
             </div>
         </div>
     </section>
-{% else %}
-<p><i>Không có sản phẩm nào</i></p>
-{% endif %}
+
 {% endblock %}

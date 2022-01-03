@@ -8,10 +8,10 @@
             <div class="collapse navbar-collapse" id="collapsibleNavId">
                 <form class="form-inline ml-auto my-2 my-lg-0 mr-3">
                     <div class="input-group" style="width: 520px;">
-                        <input type="text" class="form-control" aria-label="Small"
+                        <input type="text" class="form-control" aria-label="Small" name="keyword"
                             placeholder="Nhập sách cần tìm kiếm...">
                         <div class="input-group-append">
-                            <button type="button" class="btn" style="background-color: #CF111A; color: white;">
+                            <button type="submit" class="btn" style="background-color: #CF111A; color: white;">
                                 <i class="fa fa-search"></i>
                             </button>
                         </div>
@@ -20,24 +20,34 @@
 
 
                 <ul class="navbar-nav mb-1 ml-auto">
-                        <li class="nav-item account">
-                            <a class="nav-link" href="{{ url_for('logout') }}">Đăng Xuất</a>
-                        </li>
+                         {% if current_user.is_authenticated %}
+                            <li class="nav-item account-user">
+                                <a class="nav-link" href="{{ url_for('home') }}">
+                                {% if current_user.avatar.startswith('https') %}
+                                    <img src="{{ current_user.avatar }}" class="rounded-circle" width="30" alt="{{ current_user.username }}" />
+                                {% else %}
+                                    <img src="{{ url_for('static', filename=current_user.avatar) }}" class="rounded-circle" width="50" alt="{{ current_user.username }}" />
+                                {% endif %}
+                                {{ current_user.username }}
+                                </a>
+                            </li>
+                            <li class="nav-item account">
+                                <a class="nav-link text-success" href="{{ url_for('logout') }}">Đăng Xuất</a>
+                            </li>
+                        {% else %}
                         <li class="nav-item account">
                             <a class="nav-link" href="{{ url_for('register') }}">Đăng Ký</a>
                         </li>
                         <li class="nav-item account">
                             <a class="nav-link" href="{{ url_for('login') }}">Đăng Nhập</a>
                         </li>
-
+                         {% endif %}
                     <li class="nav-item giohang">
                         <a href="gio-hang.html" class="btn btn-secondary rounded-circle">
                             <i class="fa fa-shopping-cart"></i>
                             <div class="cart-amount">0</div>
                         </a>
-                        <a class="nav-link text-dark giohang text-uppercase" href="gio-hang.html"
-                            style="display:inline-block">Giỏ
-                            Hàng</a>
+                        <a class="nav-link text-dark giohang text-uppercase" href="{{ url_for('cart') }}" style="display:inline-block">Giỏ Hàng</a>
                     </li>
                 </ul>
             </div>

@@ -4,9 +4,17 @@
 {% endblock %}
 
 {% block content %}
+
     <div class="container login">
+
+
+    {% if err_msg %}
+    <div class="alert alert-danger">
+    {{ err_msg }}
+    </div>
+    {% endif %}
         <h1 class="text-center text">ĐĂNG NHẬP</h1>
-        <form method="post" action=>
+        <form method="post">
             <div class="form-group">
                 <label for="username"></label>
                 <input type="text"

@@ -1,4 +1,6 @@
 import json
+import os
+
 from Bookstore import app, db
 from Bookstore.models import User, UserRole, Product, Category
 from sqlalchemy import func
@@ -12,9 +14,9 @@ def read_json(path):
         return json.load(f)
 
 
-def read_data(path='data/categories.json'):
-    with open(path, encoding='utf-8') as f:
-        return json.load(f)
+# def read_data(path='data/categories.json'):
+#     with open(path, encoding='utf-8') as f:
+#         return json.load(f)
 
 
 def load_categories():
@@ -22,7 +24,12 @@ def load_categories():
     # return read_json(os.path.join(app.root_path, 'data/categories.json'))
 
 
-def load_products(cate_id=None, kw=None, from_price=None, to_price=None, page=1):
+# def load_products(path='data/products.json'):
+#     with open(path, encoding='utf-8') as f:
+#         return json.load(f)
+
+
+def load_products(cate_id=None, kw=None, from_price=None, to_price=None):
     products = Product.query.filter(Product.active.__eq__(True))
 
     if cate_id:
@@ -31,11 +38,9 @@ def load_products(cate_id=None, kw=None, from_price=None, to_price=None, page=1)
     if kw:
         products = products.filter(Product.name.contains(kw))
 
-    if from_price:
-        products = products.filter(Product.price.__ge__(from_price))
-
-    if to_price:
-        products = products.filter(Product.price.__le__(to_price))
+    if from_price and to_price:
+        products = products.filter(Product.price.__gt__(from_price),
+                                   Product.price.__lt__(to_price))
 
     return products.all()
 
@@ -53,8 +58,8 @@ def create_user(name, username, password, email=None, avatar=None):
     user = User(name=name.strip(),
                 username=username.strip(),
                 password=password,
-                email=email.strip() if email else email,
-                avatar=avatar)
+                avatar=avatar,
+                user_role=UserRole.USER)
     db.session.add(user)
 
     try:

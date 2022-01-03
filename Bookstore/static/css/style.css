@@ -42,8 +42,21 @@ a.navbar-brand {
     font-size: 34px;
 }
 
-li.nav-item.account {margin-right: 0.5rem;}
-
+li.nav-item.account {
+    margin-right: 0.5rem;
+   }
+li.nav-item.account-user{
+    padding: 0;
+    line-height: 1;
+}
+li.nav-item.account-user a{
+    font-size: 18px;
+    margin-right: 10px;
+    text-transform: uppercase;
+    padding-top: 17px;
+    color : #000;
+    font-weight: bolder;
+}
 a.nav-link {
     margin-left: -0.5rem;
 }

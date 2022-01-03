@@ -1,10 +1,73 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'layout/base.html' %}
+{% block css %}
+   <link href="{{ url_for('static', filename='css/product.css') }}" rel="stylesheet" />
+{% endblock %}
+{% block title %}
+   Tất Cả Sản phẩm
+{% endblock %}
 
-</body>
-</html>
+{% block content %}
+
+<section class="product-page mb-4">
+        <div class="container product">
+           <h1 class="text-center">
+            QUẢN LÝ SẢN PHẨM
+            <a class="badge badge-warning" href="#" id="cart-info"></a>
+           </h1>
+             <form class="form-search" method="get">
+                <div class="form-group">
+                    <input placeholder="Nhập từ khóa tìm kiếm..." type="text"
+                           name="keyword"
+                           class="form-control" />
+                </div>
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <input type="number"
+                               name="from_price"
+                               class="form-control"
+                               placeholder="Nhập giá bắt đầu..." />
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <input type="number"
+                               name="to_price"
+                               class="form-control"
+                               placeholder="Nhập giá kết thúc..." />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit"
+                           class="btn btn-danger"
+                           value="Tìm kiếm" />
+                </div>
+            </form>
+        </div>
+
+    <div class="container products-list">
+
+         {% if products %}
+
+            <div class="khoisanpham" style="padding-bottom: 2rem;">
+                     {% for p in products %}
+                    <div class="card">
+                        <a href="{{ url_for('login') }}" class="motsanpham" style="text-decoration: none; color: black;">
+                            <img class="card-img-top anh" src="{{ url_for('static',filename=p.image) }}"
+                                alt="{{ p.name }}">
+                            <div class="card-body content mt-3">
+                                <h3 class="card-title name">{{ p.name}}</h3>
+                                <div class="price">{{ "{:,.0f}".format(p.price) }} ₫</div>
+                                <a class="btn btn-cart">Đặt Hàng</a>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+        {% else %}
+            <p><i>Không có sản phẩm nào</i></p>
+        {% endif %}
+    </div>
+
+
+
+</section>
+
+{% endblock %}

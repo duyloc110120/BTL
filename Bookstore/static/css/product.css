@@ -1,7 +1,13 @@
-.product-detail{
+.product{
     margin-top:80px;
 }
-
+.form-search{
+    max-width: 500px;
+    margin: 0 auto;
+}
+.products-list{
+    margin-top: 100px;
+}
 .product-detail .product-img{
     transition: 0.2s;
 }
@@ -52,7 +58,15 @@
     font-size: 14px;
     margin-top: 9px;
 }
+.khoianh{
+    margin: auto;
+}
 
+.khoianh .anhto img{
+    width: 100%;
+    height:100%;
+    object-fit: cover;
+}
 .thongtinsach a.tacgia {
     color: #F5A623;
     text-decoration: none;
@@ -71,6 +85,8 @@
     border-radius: 5px;
     padding: 13px;
     font-size: 13px;
+    width: 500px;
+    min-width: 250px;
 }
 .products-content .sale ul {
     list-style: none;
@@ -119,4 +135,10 @@
 }
 .products-content .nutmua:hover {
     box-shadow: 0px 11px 20px -10px #fd8205;
+}
+
+.tieude{
+    margin-top: 10px;
+    font-size: 30px;
+   text-transform: uppercase;
 }
