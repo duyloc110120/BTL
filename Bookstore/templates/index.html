@@ -39,7 +39,7 @@
                         <ul>
                             {% for c in categories %}
                             <li>
-                                <a href="#">{{ c.name }}</a>
+                                <a href="{{ url_for('product') }}">{{ c.name }}</a>
                                 <i class="fa fa-chevron-right float-right"></i>
                             </li>
                             {% endfor %}

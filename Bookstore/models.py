@@ -56,40 +56,78 @@ class Product(BaseModel):
 
 if __name__ == '__main__':
     db.create_all()
+    # categories = [{
+    #     "id": 1,
+    #     "name": "Sách Kinh Tế - Kĩ Năng"
+    # }, {
+    #     "id": 2,
+    #     "name": "Sách Văn Học Việt Nam"
+    # }, {
+    #     "id": 3,
+    #     "name": "Sách Văn Học Nước Ngoài"
+    # }, {
+    #     "id": 4,
+    #     "name": "Sách Thiếu Nhi"
+    # }, {
+    #     "id": 5,
+    #     "name": "Sách Giáo Dục Gia Đình"
+    # }, {
+    #     "id": 6,
+    #     "name": "Sách Lịch Sử"
+    # }, {
+    #     "id": 7,
+    #     "name": "Sách Văn Hóa Nghệ Thuật"
+    # }, {
+    #     "id": 8,
+    #     "name": "Sách Khoa Học - Triết Học"
+    # }, {
+    #     "id": 9,
+    #     "name": "Sách Tâm Linh Tôn Giáo"
+    # }, {
+    #     "id": 10,
+    #     "name": "Sách Y học- Thực Dưỡng"
+    # }]
+    #
+    # for c in categories:
+    #     cate = Category(id=c['id'], name=c['name'])
+    #     db.session.add(cate)
+    #
+    # db.session.commit()
 
-    products = [{
-        "id": "1",
-        "name": "Lập Kế Hoạch Kinh Doanh Hiệu Quả",
-        "description": "Lập Kế Hoạch Kinh Doanh Hiệu Quả",
-        "price": "120000",
-        "image": "images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg",
-        "created_date": "2015-12-12",
-        "quantity": "200",
-        "category_id": "1"
-    }, {
-        "id": "2",
-        "name": "Ma Bùn Lưu Manh",
-        "description": "Ma Bùn Lưu Manh",
-        "price": "150000",
-        "image": "images/ma-bun-luu-manh.jpg",
-        "created_date": "2015-12-12",
-        "quantity": "600",
-        "category_id": "2"
-    }, {
-        "id": "3",
-        "name": "Giao dịch mọi nơi , không chỉ là ngân hàng",
-        "description": "Giao Dịnh mọi nơi , không chỉ là ngân hàng",
-        "price": "100000",
-        "image": "images/bank-4.0.jpg",
-        "created_date": "2015-12-12",
-        "quantity": "300",
-        "category_id": "3"
-    }]
+    # products = [{
+    #     "id": 1,
+    #     "name": "Lập Kế Hoạch Kinh Doanh Hiệu Quả",
+    #     "description": "Lập Kế Hoạch Kinh Doanh Hiệu Quả",
+    #     "price": 120000,
+    #     "image": "images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg",
+    #     "created_date": "2015-12-12",
+    #     "quantity": 200,
+    #     "category_id": 1
+    # }, {
+    #     "id": 2,
+    #     "name": "Ma Bùn Lưu Manh",
+    #     "description": "Ma Bùn Lưu Manh",
+    #     "price": 150000,
+    #     "image": "images/ma-bun-luu-manh.jpg",
+    #     "created_date": "2015-12-12",
+    #     "quantity": 600,
+    #     "category_id": 2
+    # }, {
+    #     "id": 3,
+    #     "name": "Giao dịch mọi nơi , không chỉ là ngân hàng",
+    #     "description": "Giao Dịnh mọi nơi , không chỉ là ngân hàng",
+    #     "price": 100000,
+    #     "image": "images/bank-4.0.jpg",
+    #     "created_date": "2015-12-12",
+    #     "quantity": 300,
+    #     "category_id": 3
+    # }]
+    #
+    # for p in products:
+    #     pro = Product(name=p['name'], price=p['price'], image=p['image'], quantity=p['quantity'],
+    #                   created_date=p['created_date'],
+    #                   description=p['description'], category_id=p['category_id'])
+    #     db.session.add(pro)
+    #
+    # db.session.commit()
 
-    for p in products:
-        pro = Product(name=p['name'], price=p['price'], image=p['image'], quantity=p['quantity'],
-                      created_date=p['created_date'],
-                      description=p['description'], category_id=p['category_id'])
-        db.session.add(pro)
-
-    db.session.commit()
