@@ -10,8 +10,8 @@
     <div class="container cart">
         <h1 class="text-center text-success">THANH TOÁN GIỎ HÀNG</h1>
         <div class="alert alert-warning">
-            <h3>Số lượng sản phẩm: </h3>
-            <h3>Tổng tiền:VNĐ</h3>
+            <h3>Số lượng sản phẩm: <span class="cart-info">{{ cart_stats.total_quantity }}</span></h3>
+            <h3>Tổng tiền :  <span id="amountId">{{ "{:,.0f}".format(cart_stats.total_amount) }}</span> VND</h3>
         </div>
         <table class="table">
     <tr>
@@ -21,6 +21,27 @@
         <th>Số lượng</th>
         <th></th>
     </tr>
+    {% for c in session['cart'].values() %}
+    <tr id="product{{ c.id }}">
+        <td>{{ c.id }}</td>
+        <td>{{ c.name }}</td>
+        <td>{{ "{:,.1f}".format(c.price) }} VND</td>
+        <td>
+            <div class="form-group">
+                <input type="number"
+                       onchange ="updateCart({{ c.id }}, this)"
+                       value="{{ c.quantity }}"
+                       class="form-control" />
+            </div>
+        </td>
+        <td>
+            <input type="button"
+                   value="Xóa"
+                   onclick="deleteCart({{ c.id }})"
+                   class="btn btn-danger" />
+        </td>
+    </tr>
+    {% endfor %}
     </table>
         {% if current_user.is_authenticated %}
         <div>

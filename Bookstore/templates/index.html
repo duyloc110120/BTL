@@ -102,7 +102,7 @@
                             <div class="card-body content mt-3">
                                 <h3 class="card-title name">{{ p.name}}</h3>
                                 <div class="price">{{ "{:,.0f}".format(p.price) }} ₫</div>
-                                <a class="btn btn-cart">Đặt Hàng</a>
+                                <a class="btn btn-cart" onclick="addToCart({{ p.id }}, '{{ p.name }}', {{ p.price }})">Đặt Hàng</a>
                             </div>
                         </a>
                     </div>

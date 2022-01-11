@@ -96,7 +96,7 @@ def cart():
     return render_template('cart.html')
 
 
-@app.route("/admin-login", methods=['post'])
+@app.route("/admin/login", methods=['post'])
 def admin_login():
     username = request.form.get('username')
     password = request.form.get('password')
@@ -135,6 +135,44 @@ def add_to_cart():
     return jsonify(utils.cart_stats(cart))
 
 
+@app.route('/api/update-cart', methods=['put'])
+def update_cart():
+    data = request.json
+    id = str(data.get('id'))
+    quantity = data.get('quantity')
+
+    cart = session.get('cart')
+    if cart:
+        if id in cart and quantity:
+            cart[id]['quantity'] = quantity
+            session['cart'] = cart
+
+    return jsonify(utils.cart_stats(cart))
+
+
+@app.route('/api/cart/<product_id>', methods=['delete'])
+def delete_cart(product_id):
+    cart = session.get('cart')
+    if cart:
+        if product_id in cart:
+            del cart[product_id]
+            session['cart'] = cart
+
+    return jsonify(utils.cart_stats(cart))
+
+
+@app.route('/api/pay', methods=['post'])
+def pay():
+    try:
+        utils.add_receipt(session.get('cart'))
+
+        del session['cart']
+        return jsonify({'code': 200})
+    except Exception as ex:
+        print(str(ex))
+        return jsonify({'code': 400})
+
+
 @loginn.user_loader
 def load_user(user_id):
     return utils.get_user_by_id(user_id=user_id)
@@ -143,7 +181,8 @@ def load_user(user_id):
 @app.context_processor
 def common_response():
     return {
-        'categories': utils.load_categories()
+        'categories': utils.load_categories(),
+        'cart_stats': utils.cart_stats(session.get('cart'))
     }
 
 

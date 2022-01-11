@@ -38,6 +38,13 @@ class Category(BaseModel):
                             backref='category', lazy=True)
 
 
+class Author(BaseModel):
+    __tableName__ = 'author'
+
+    book = relationship('Product',
+                        backref='author', lazy=True)
+
+
 class Product(BaseModel):
     __tableName__ = 'product'
 
@@ -49,9 +56,26 @@ class Product(BaseModel):
     quantity = Column(Integer, nullable=False)
     category_id = Column(Integer, ForeignKey(Category.id),
                          nullable=False)
+    author_id = Column(Integer, ForeignKey(Author.id),
+                       nullable=True)
 
     def __str__(self):
         return self.name
+
+
+class Receipt(db.Model):
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    created_date = Column(DateTime, default=datetime.today())
+    customer_id = Column(Integer, ForeignKey(User.id))
+    details = relationship('ReceiptDetail',
+                           backref='receipt', lazy=True)
+
+
+class ReceiptDetail(db.Model):
+    receipt_id = Column(Integer, ForeignKey(Receipt.id), nullable=False, primary_key=True)
+    product_id = Column(Integer, ForeignKey(Product.id), nullable=False, primary_key=True)
+    quantity = Column(Integer, default=0)
+    price = Column(Float, default=0)
 
 
 if __name__ == '__main__':
@@ -130,4 +154,3 @@ if __name__ == '__main__':
     #     db.session.add(pro)
     #
     # db.session.commit()
-

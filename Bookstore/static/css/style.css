@@ -303,6 +303,7 @@ a.btn.btn-warning.btn-sm.text-white {
     display: flex;
     flex : 1;
     flex-wrap : wrap;
+    gap: 20px;
 }
 
 .combohot .card{

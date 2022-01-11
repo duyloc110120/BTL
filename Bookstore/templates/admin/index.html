@@ -7,9 +7,9 @@
   <div class="col-md-5 col-xs-12">
     <table class="table">
       <tr>
-        <td>Ma danh muc</td>
-        <td>Ten danh muc</td>
-        <td>So san pham</td>
+        <td>Mã Danh Mục</td>
+        <td>Tên Danh Mục</td>
+        <td>Số Sản Phẩm</td>
       </tr>
     </table>
   </div>
@@ -17,7 +17,7 @@
 {% else %}
 
 <h1 class="text-center text-danger">LOGIN</h1>
-<form method="post" action="{{ url_for('home') }}">
+<form method="post" action="{{ url_for('admin_login') }}">
     <div class="form-group">
         <label for="username">Username</label>
         <input type="text"

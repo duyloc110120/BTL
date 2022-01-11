@@ -76,3 +76,32 @@ def check_user(username, password, role=UserRole.USER):
     return User.query.filter(User.username.__eq__(username.strip()),
                              User.password.__eq__(password),
                              User.user_role.__eq__(role)).first()
+
+
+def cart_stats(cart):
+    total_quantity, total_amount = 0, 0
+
+    if cart:
+        for c in cart.values():
+            total_quantity += c['quantity']
+            total_amount += c['quantity'] * c['price']
+
+    return {
+        'total_quantity': total_quantity,
+        'total_amount': total_amount
+    }
+
+
+def add_receipt(cart):
+    if cart:
+        receipt = Receipt(user=current_user)
+        db.session.add(receipt)
+
+        for c in cart.values():
+            detail = ReceiptDetail(receipt=receipt,
+                                   product_id=c['id'],
+                                   quantity=c['quantity'],
+                                   price=c['price'])
+            db.session.add(detail)
+
+        db.session.commit()

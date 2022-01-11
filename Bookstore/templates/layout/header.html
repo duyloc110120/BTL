@@ -43,9 +43,9 @@
                         </li>
                          {% endif %}
                     <li class="nav-item giohang">
-                        <a href="gio-hang.html" class="btn btn-secondary rounded-circle">
+                        <a href="{{ url_for('cart') }}" class="btn btn-secondary rounded-circle">
                             <i class="fa fa-shopping-cart"></i>
-                            <div class="cart-amount">0</div>
+                            <div class="cart-amount cart-info">{{ cart_stats.total_quantity }}</div>
                         </a>
                         <a class="nav-link text-dark giohang text-uppercase" href="{{ url_for('cart') }}" style="display:inline-block">Giỏ Hàng</a>
                     </li>
