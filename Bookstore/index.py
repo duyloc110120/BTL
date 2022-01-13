@@ -1,12 +1,15 @@
-from Bookstore import app, loginn
+from Bookstore import app, loginn, decorator
 from flask import render_template, request, redirect, url_for, session, jsonify
 from flask_login import login_user, logout_user, login_required
 import cloudinary.uploader
 import utils
 from Bookstore.admin import *
+from Bookstore.models import Product
 
 
 @app.route('/')
+# @decorator.login_required
+# @decorator.manage_permission_required
 def home():
     cate_id = request.args.get('category_id')
     kw = request.args.get('keyword')
@@ -39,12 +42,14 @@ def login():
             username = request.form['username']
             password = request.form['password']
 
-            user = utils.check_user(username=username, password=password)
+            user = utils.check_user(username=username, password=password , role=UserRole.USER)
             if user:
                 login_user(user=user)
 
-                nextPage = request.args.get('next', 'home')
-                return redirect(url_for(nextPage))
+                if 'next' in request.args:
+                    return redirect(request.args['next'])
+
+                return redirect(url_for('home'))
             else:
                 error_msg = "Chương trình đang có lỗi !! Vui lòng thử lại sau"
 
@@ -92,8 +97,9 @@ def logout():
 
 
 @app.route('/cart')
+@login_required
 def cart():
-    return render_template('cart.html')
+    return render_template('cart.html', cart_stats=utils.cart_stats(session.get('cart')))
 
 
 @app.route("/admin/login", methods=['post'])

@@ -10,7 +10,6 @@ class BaseModel(db.Model):
     __abstract__ = True
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(String(50), nullable=False)
 
 
 class UserRole(UserEnum):
@@ -19,6 +18,7 @@ class UserRole(UserEnum):
 
 
 class User(BaseModel, UserMixin):
+    name = Column(String(50), nullable=False)
     username = Column(String(50), nullable=False, unique=True)
     password = Column(String(50), nullable=False)
     active = Column(Boolean, default=True)
@@ -26,6 +26,7 @@ class User(BaseModel, UserMixin):
     joined_date = Column(DateTime, default=datetime.now())
     avatar = Column(String(100), default='images/avatar.jpg')
     user_role = Column(Enum(UserRole), default=UserRole.USER)
+    receipts = relationship('Receipt', backref='user', lazy=True)
 
     def __str__(self):
         return self.name
@@ -34,6 +35,7 @@ class User(BaseModel, UserMixin):
 class Category(BaseModel):
     __tableName__ = 'category'
 
+    name = Column(String(50), nullable=False)
     products = relationship('Product',
                             backref='category', lazy=True)
 
@@ -41,6 +43,7 @@ class Category(BaseModel):
 class Author(BaseModel):
     __tableName__ = 'author'
 
+    name = Column(String(50), nullable=False)
     book = relationship('Product',
                         backref='author', lazy=True)
 
@@ -48,6 +51,7 @@ class Author(BaseModel):
 class Product(BaseModel):
     __tableName__ = 'product'
 
+    name = Column(String(50), nullable=False)
     description = Column(String(255))
     price = Column(Float, default=0)
     image = Column(String(100))
@@ -56,17 +60,16 @@ class Product(BaseModel):
     quantity = Column(Integer, nullable=False)
     category_id = Column(Integer, ForeignKey(Category.id),
                          nullable=False)
-    author_id = Column(Integer, ForeignKey(Author.id),
-                       nullable=True)
+    receipt_details = relationship('ReceiptDetail', backref='product', lazy=True)
+    author_id = Column(Integer, ForeignKey(Author.id), nullable=True)
 
     def __str__(self):
         return self.name
 
 
-class Receipt(db.Model):
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    created_date = Column(DateTime, default=datetime.today())
-    customer_id = Column(Integer, ForeignKey(User.id))
+class Receipt(BaseModel):
+    created_date = Column(DateTime, default=datetime.now())
+    customer_id = Column(Integer, ForeignKey(User.id), nullable=False)
     details = relationship('ReceiptDetail',
                            backref='receipt', lazy=True)
 
@@ -117,7 +120,24 @@ if __name__ == '__main__':
     #     db.session.add(cate)
     #
     # db.session.commit()
-
+    #
+    # authors = [{
+    #     "id": 1,
+    #     "name": "Max"
+    # }, {
+    #     "id": 2,
+    #     "name": "John"
+    # }, {
+    #     "id": 3,
+    #     "name": "Kid"
+    # }]
+    #
+    # for a in authors:
+    #     author = Author(id=a['id'], name=a['name'])
+    #     db.session.add(author)
+    #
+    # db.session.commit()
+    #
     # products = [{
     #     "id": 1,
     #     "name": "Lập Kế Hoạch Kinh Doanh Hiệu Quả",
@@ -126,7 +146,8 @@ if __name__ == '__main__':
     #     "image": "images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg",
     #     "created_date": "2015-12-12",
     #     "quantity": 200,
-    #     "category_id": 1
+    #     "category_id": 1,
+    #     "author_id": 1
     # }, {
     #     "id": 2,
     #     "name": "Ma Bùn Lưu Manh",
@@ -135,7 +156,8 @@ if __name__ == '__main__':
     #     "image": "images/ma-bun-luu-manh.jpg",
     #     "created_date": "2015-12-12",
     #     "quantity": 600,
-    #     "category_id": 2
+    #     "category_id": 2,
+    #     "author_id": 2
     # }, {
     #     "id": 3,
     #     "name": "Giao dịch mọi nơi , không chỉ là ngân hàng",
@@ -144,13 +166,14 @@ if __name__ == '__main__':
     #     "image": "images/bank-4.0.jpg",
     #     "created_date": "2015-12-12",
     #     "quantity": 300,
-    #     "category_id": 3
+    #     "category_id": 3,
+    #     "author_id": 3
     # }]
     #
     # for p in products:
     #     pro = Product(name=p['name'], price=p['price'], image=p['image'], quantity=p['quantity'],
     #                   created_date=p['created_date'],
-    #                   description=p['description'], category_id=p['category_id'])
+    #                   description=p['description'], category_id=p['category_id'], author_id=p['author_id'])
     #     db.session.add(pro)
     #
     # db.session.commit()

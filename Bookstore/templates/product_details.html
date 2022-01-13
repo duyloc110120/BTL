@@ -43,17 +43,9 @@
                                         <li>Bao sách miễn phí (theo yêu cầu)</li>
                                     </ul>
                                 </div>
-                                <div class="quantily d-flex">
-                                    <label class="font-weight-bold">Số lượng: </label>
-                                    <div class="input-number input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text btn-spin btn-dec">-</span>
-                                        </div>
-                                        <input type="text" value="1" class="soluongsp  text-center">
-                                        <div class="input-group-append">
-                                            <span class="input-group-text btn-spin btn-inc">+</span>
-                                        </div>
-                                    </div>
+                                <div class="quantily mb-3 w-100">
+                                    <label class="font-weight-bold w-100">Số lượng còn lại : {{ products.quantity }} </label>
+
                                 </div>
                                 <div class="nutmua btn w-100 text-uppercase" onclick="addToCart({{ products.id }}, '{{ products.name }}', {{ products.price }})">Chọn mua</div>
                                 <a class="huongdanmuahang text-decoration-none" href="#">(Vui lòng xem hướng dẫn mua
@@ -67,8 +59,8 @@
                             <div class="col-md-5">
                                 <div class="thongtinsach">
                                     <ul>
-                                        <li>Tác giả: <a href="#" class="tacgia">Brian Finch</a></li>
-                                        <li>Ngày xuất bản: <b>04-2020</b></li>
+                                        <li>Tác giả: <a href="#" class="tacgia">{{ products.author.name }}</a></li>
+                                        <li>Ngày xuất bản: <b>{{ products.created_date }}</b></li>
                                         <li>Kích thước: <b>20.5 x 13.5 cm</b></li>
                                         <li>Dịch giả: Skye Phan;</li>
                                         <li>Nhà xuất bản: Nhà Xuất Bản Thanh Niên</li>

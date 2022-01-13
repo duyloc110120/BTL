@@ -1,6 +1,6 @@
 from Bookstore import db, app, utils
 
-from Bookstore.models import User, UserRole
+from Bookstore.models import User, UserRole, Category, Product
 from flask_admin.contrib.sqla import ModelView
 from flask_admin import BaseView, expose, Admin, AdminIndexView
 from flask_login import logout_user, current_user
@@ -14,6 +14,12 @@ class AdminAutheticatedView(ModelView):
         return current_user.is_authenticated and current_user.user_role.__eq__(UserRole.ADMIN)
 
 
+class ProductView(AdminAutheticatedView):
+    can_export = True
+    column_filters = ['name', 'price']
+    column_searchable_list = ['name']
+
+
 class LogoutView(BaseView):
     @expose("/")
     def index(self):
@@ -22,13 +28,27 @@ class LogoutView(BaseView):
         return redirect('/admin')
 
     def is_accessible(self):
-        return current_user.is_authenticated
+        return current_user.is_authenticated and current_user.user_role.__eq__(UserRole.ADMIN)
 
 
 class MyAdminIndexView(AdminIndexView):
     @expose('/')
     def index(self):
-        return self.render('admin/index.html')
+        stats = utils.cate_stats()
+        return self.render('admin/index.html', stats=stats)
+
+
+class StatsView:
+    pass
+
+
+class RegulationsView(AdminAutheticatedView):
+    column_display_pk = True
+    can_create = True
+    can_delete = False
+    can_edit = True
+    can_export = True
+    form_columns = ()
 
 
 admin = Admin(app=app,
@@ -37,4 +57,8 @@ admin = Admin(app=app,
               index_view=MyAdminIndexView())
 
 admin.add_view(AdminAutheticatedView(User, db.session))
+admin.add_view(AdminAutheticatedView(Category, db.session, name="Danh mục"))
+admin.add_view(ProductView(Product, db.session, name="Sản phẩm"))
+# admin.add_view(StatsView(name="Thống Kê Báo Cáo"))
+# admin.add_view(AdminAutheticatedView(Regulation,db.session, name='Qui Định'))
 admin.add_view(LogoutView(name="Đăng Xuất"))

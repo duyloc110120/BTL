@@ -67,9 +67,8 @@ function deleteCart(productId) {
     }
 
 }
-
 function pay() {
-    if (confirm("Ban chac chan thanh toan khong?") == true) {
+    if (confirm("Bạn có muốn thanh toán không") == true) {
         fetch('/api/pay', {
             method: 'post'
         }).then(function(res) {

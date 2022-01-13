@@ -13,6 +13,7 @@
             <h3>Số lượng sản phẩm: <span class="cart-info">{{ cart_stats.total_quantity }}</span></h3>
             <h3>Tổng tiền :  <span id="amountId">{{ "{:,.0f}".format(cart_stats.total_amount) }}</span> VND</h3>
         </div>
+        {% if 'cart' in session and session['cart'] %}
         <table class="table">
     <tr>
         <th>Mã sản phẩm</th>
@@ -45,14 +46,19 @@
     </table>
         {% if current_user.is_authenticated %}
         <div>
-            <input type="button" value="Thanh toán" onclick="pay()" class="btn btn-success" />
+           <input type="button"
+               onclick="pay()"
+               value="Thanh toán"
+               class="btn btn-danger" />
         </div>
         <br><br>
         {% else %}
             <a href="{{ url_for('login', next='cart') }}" class="pay">Đăng nhập để thanh toán</a>
         {% endif %}
     </div>
-
+{% else %}
+<p><i>Không có sản phẩm nào trong giỏ</i></p>
+{% endif %}
 
 {% endblock %}
 

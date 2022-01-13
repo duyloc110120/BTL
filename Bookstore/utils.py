@@ -2,7 +2,7 @@ import json
 import os
 
 from Bookstore import app, db
-from Bookstore.models import User, UserRole, Product, Category
+from Bookstore.models import User, UserRole, Product, Category, Receipt, ReceiptDetail
 from sqlalchemy import func
 from sqlalchemy.sql import extract
 from flask_login import current_user
@@ -105,3 +105,17 @@ def add_receipt(cart):
             db.session.add(detail)
 
         db.session.commit()
+
+
+def cate_stats():
+    return Category.query.join(Product,
+                               Product.category_id.__eq__(Category.id),
+                               isouter=True) \
+        .add_columns(func.count(Product.id)) \
+        .group_by(Category.id, Category.name).all()
+
+
+def cate_stats2():
+    return db.session.query(Category.id, Category.name, func.count(Product.id)) \
+        .join(Product, Product.category_id.__eq__(Category.id), isouter=True) \
+        .group_by(Category.id, Category.name).all()
