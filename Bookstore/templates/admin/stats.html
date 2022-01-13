@@ -1,0 +1,144 @@
+{% extends 'admin/index.html' %}
+
+{% block body %}
+<h1 class="text-center text-info mt-4 mb-5">Thống kê và báo cáo doanh thu</h1>
+
+<div class="row">
+    <div class="col-md-6 col-xs-12">
+        <table class="table">
+            <tr>
+                <th>Mã sản phẩm</th>
+                <th>Tên sản phẩm</th>
+                <th>Doanh thu</th>
+            </tr>
+            {% for s in stats %}
+            <tr>
+                <td>{{ s[0] }}</td>
+                <td>{{ s[1] }}</td>
+                <td>
+                    {% if s[2] %}
+                    {{ "{:,.0f}".format(s[2]) }}
+                    {% else %}
+                    0
+                    {% endif %}
+                    VND
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="col-md-6 col-xs-12">
+        <form>
+            <div class="form-group">
+                <input type="text"
+                       name="kw"
+                       placeholder="Nhập từ khóa"
+                       class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="date"
+                       name="from_date"
+                       class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="date"
+                       name="to_date"
+                       class="form-control" />
+            </div>
+            <input type="submit" value="Thống kê" class="btn btn-primary" />
+        </form>
+        <canvas id="myProductChart"></canvas>
+    </div>
+</div>
+
+<div class="row mt-5 mb-5">
+    <div class="col-md-6 col-xs-12">
+        <table class="table">
+            <tr>
+                <th>Tháng</th>
+                <th>Doanh thu</th>
+            </tr>
+            {% for s in month_stats %}
+            <tr>
+                <td>{{ s[0] }}</td>
+                <td>
+                    {{ "{:,.0f}".format(s[1]) }}VND
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="col-md-6 col-xs-12">
+        <form>
+            <div class="form-group">
+                <input type="number"
+                       name="year"
+                       placeholder="Nhập năm"
+                       class="form-control" />
+            </div>
+            <input type="submit" value="Thống kê" class="btn btn-primary" />
+        </form>
+        <canvas id="myProductMonthChart"></canvas>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    let labels = [], labels2 = []
+    let data = [], data2 = []
+    {% for s in stats %}
+        {% if s[2] %}
+            labels.push('{{ s[1] }}')
+            data.push({{ s[2] }})
+        {% endif %}
+    {% endfor %}
+
+    {% for s in month_stats %}
+
+        labels2.push({{ s[0] }})
+        data2.push({{ s[1] }})
+
+    {% endfor %}
+
+    window.onload = function() {
+        let ctx = document.getElementById('myProductChart').getContext('2d');
+        showChart(ctx, labels, data, 'bar')
+
+        let ctx2 = document.getElementById('myProductMonthChart').getContext('2d')
+        showChart(ctx2, labels2, data2, 'line')
+    }
+
+    function showChart(ctx, labels, data, type) {
+        let colors = [], borderColors=[]
+        let r, g, b
+        for (let i = 0; i < labels.length; i++) {
+            r = parseInt(Math.random()*255)
+            g = parseInt(Math.random()*255)
+            b = parseInt(Math.random()*255)
+            colors.push(`rgba(${r}, ${g}, ${b}, 0.2)`)
+            borderColors.push(`rgba(${r}, ${g}, ${b}, 1)`)
+        }
+
+        const myChart = new Chart(ctx, {
+            type: type,
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Thống kê sản phẩm theo danh mục',
+                    data: data,
+                    backgroundColor: colors,
+                    borderColor: borderColors,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    }
+</script>
+{% endblock %}

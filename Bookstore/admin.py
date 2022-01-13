@@ -38,8 +38,19 @@ class MyAdminIndexView(AdminIndexView):
         return self.render('admin/index.html', stats=stats)
 
 
-class StatsView:
-    pass
+class StatsView(BaseView):
+    @expose("/")
+    def index(self):
+        kw = request.args.get('kw')
+        from_date = request.args.get('from_date')
+        to_date = request.args.get('to_date')
+        year = request.args.get('year', datetime.now().year)
+
+        return self.render('admin/stats.html',
+                           month_stats=utils.product_month_stats(year=year),
+                           stats=utils.product_stats(kw=kw,
+                                                     from_date=from_date,
+                                                     to_date=to_date))
 
 
 class RegulationsView(AdminAutheticatedView):
@@ -59,6 +70,6 @@ admin = Admin(app=app,
 admin.add_view(AdminAutheticatedView(User, db.session))
 admin.add_view(AdminAutheticatedView(Category, db.session, name="Danh mục"))
 admin.add_view(ProductView(Product, db.session, name="Sản phẩm"))
-# admin.add_view(StatsView(name="Thống Kê Báo Cáo"))
+admin.add_view(StatsView(name="Thống Kê Báo Cáo"))
 # admin.add_view(AdminAutheticatedView(Regulation,db.session, name='Qui Định'))
 admin.add_view(LogoutView(name="Đăng Xuất"))

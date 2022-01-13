@@ -115,7 +115,37 @@ def cate_stats():
         .group_by(Category.id, Category.name).all()
 
 
-def cate_stats2():
-    return db.session.query(Category.id, Category.name, func.count(Product.id)) \
-        .join(Product, Product.category_id.__eq__(Category.id), isouter=True) \
-        .group_by(Category.id, Category.name).all()
+# def cate_stats2():
+#     return db.session.query(Category.id, Category.name, func.count(Product.id)) \
+#         .join(Product, Product.category_id.__eq__(Category.id), isouter=True) \
+#         .group_by(Category.id, Category.name).all()
+
+
+def product_stats(kw=None, from_date=None, to_date=None):
+    q = db.session.query(Product.id, Product.name,
+                         func.sum(ReceiptDetail.quantity * ReceiptDetail.price)) \
+        .join(ReceiptDetail,
+              ReceiptDetail.product_id.__eq__(Product.id), isouter=True) \
+        .join(Receipt, Receipt.id.__eq__(ReceiptDetail.receipt_id)) \
+        .group_by(Product.id, Product.name)
+
+    if kw:
+        q = q.filter(Product.name.contains(kw))
+
+    if from_date:
+        q = q.filter(Receipt.created_date.__ge__(from_date))
+
+    if to_date:
+        q = q.filter(Receipt.created_date.__le__(to_date))
+
+    return q.all()
+
+
+def product_month_stats(year):
+    return db.session.query(extract('month', Receipt.created_date),
+                            func.sum(ReceiptDetail.quantity * ReceiptDetail.price)) \
+        .join(ReceiptDetail, ReceiptDetail.receipt_id.__eq__(Receipt.id)) \
+        .filter(extract('year', Receipt.created_date) == year) \
+        .group_by(extract('month', Receipt.created_date)) \
+        .order_by(extract('month', Receipt.created_date)) \
+        .all()

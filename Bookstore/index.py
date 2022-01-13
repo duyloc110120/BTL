@@ -4,11 +4,11 @@ from flask_login import login_user, logout_user, login_required
 import cloudinary.uploader
 import utils
 from Bookstore.admin import *
-from Bookstore.models import Product
+from Bookstore.models import Product, Receipt, ReceiptDetail
 
 
 @app.route('/')
-# @decorator.login_required
+@decorator.login_required
 # @decorator.manage_permission_required
 def home():
     cate_id = request.args.get('category_id')
@@ -42,7 +42,7 @@ def login():
             username = request.form['username']
             password = request.form['password']
 
-            user = utils.check_user(username=username, password=password , role=UserRole.USER)
+            user = utils.check_user(username=username, password=password, role=UserRole.USER)
             if user:
                 login_user(user=user)
 
@@ -177,6 +177,13 @@ def pay():
     except Exception as ex:
         print(str(ex))
         return jsonify({'code': 400})
+
+
+@app.route('/receipt')
+def receipt():
+    re_details = ReceiptDetail.query.all()
+
+    return render_template('receipt.html', re_datails=re_details)
 
 
 @loginn.user_loader

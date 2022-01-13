@@ -67,6 +67,47 @@ class Product(BaseModel):
         return self.name
 
 
+class Staff(BaseModel, UserMixin):
+    __tableName__ = 'staff'
+
+    name = Column(String(50), nullable=False)
+    email = Column(String(100))
+    username = Column(String(50), nullable=False, unique=True)
+    password = Column(String(100), nullable=False)
+    avatar = Column(String(100))
+    active = Column(Boolean, default=True)
+    user_role = Column(Enum(UserRole), default=UserRole.USER)
+    debts = relationship('Debt', backref='staff', lazy=True)
+
+
+class ImportReceipt(BaseModel):
+    date = Column(DateTime, default=datetime.today())
+    staff_id = Column(Integer, ForeignKey(Staff.id), nullable=True)
+
+
+class ImportReceiptDetail(BaseModel):
+    import_id = Column(Integer, ForeignKey(ImportReceipt.id), nullable=False)
+    quantity = Column(Integer, default=0)
+    name = Column(String(50))
+    price = Column(Integer, default=0)
+
+
+class Debt(BaseModel):
+    created_date = Column(DateTime, default=datetime.today())
+    staff_id = Column(Integer, ForeignKey(Staff.id))
+    details = relationship('OrderDetail',
+                           backref='debt', lazy=True)
+
+
+class OrderDetail(BaseModel):
+    debt_id = Column(Integer, ForeignKey(Debt.id), nullable=False)
+    book_id = Column(Integer, ForeignKey(Product.id), nullable=False)
+    quantity = Column(Integer, default=0)
+    author = Column(String(50))
+    category = Column(String(50))
+    price = Column(Integer, default=0)
+
+
 class Receipt(BaseModel):
     created_date = Column(DateTime, default=datetime.now())
     customer_id = Column(Integer, ForeignKey(User.id), nullable=False)

@@ -1,0 +1,55 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}
+Hóa đơn
+{% endblock %}
+{% block css %}
+   <link href="{{ url_for('static', filename='css/receipt.css') }}" rel="stylesheet" />
+{% endblock %}
+{% block content %}
+<div class="container-fuild container">
+
+    <span class="gradient"></span>
+     <div class="card">
+            <div class="card-header">
+                Danh sách Hóa đơn
+            </div>
+
+            <!-- Card Body -->
+            <div class="card-body">
+                <table class="table table-bordered text-center">
+
+                    <thead>
+                        <tr>
+                            <th>Số hóa đơn</th>
+                            <th>ID khách hàng</th>
+                            <th>Tên khách hàng</th>
+                            <th>Ngày lập hóa đơn</th>
+                            <th>Tổng tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for p in re_datails %}
+                        <tr>
+                            <td>{{ p.receipt_id }}</td>
+                            <td>
+                                {{p.receipt.customer_id}}
+                            </td>
+                            <td>
+                                {{ p.receipt.user.name }}
+                            </td>
+                            <td>
+                                {{ p.receipt.created_date }}
+                            </td>
+                            <td>
+                                {{ "{:,.0f}".format(p.price * p.quantity) }} VND
+                            </td>
+                        </tr>
+                     {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <!-- End Card Body -->
+        </div>
+</div>
+{% endblock %}
