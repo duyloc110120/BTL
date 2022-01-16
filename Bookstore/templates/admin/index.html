@@ -1,6 +1,7 @@
 {% extends 'admin/base.html' %}
 {% block body %}
-{% if current_user.is_authenticated %}
+{% if current_user.is_authenticated and current_user.user_role.ADMIN %}
+
 <h1 class="mb-5" >WELCOME <span class="text-danger">{{ current_user.name }}</span> TO ADMINISTRATION PAGE!!!</h1>
 
 <div class="row">

@@ -300,12 +300,16 @@ a.btn.btn-warning.btn-sm.text-white {
 }
 
 .khoisanpham{
+    width: 100%;
     display: flex;
     flex : 1;
-    flex-wrap : wrap;
-    gap: 20px;
-}
+    flex-wrap: wrap;
 
+}
+.khoisanpham.ksp{
+      max-height: 450px;
+       overflow: hidden;
+}
 .combohot .card{
     border: none;
 }

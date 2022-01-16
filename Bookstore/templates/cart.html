@@ -2,8 +2,9 @@
 {% block css %}
    <link href="{{ url_for('static', filename='css/cart.css') }}" rel="stylesheet" />
 {% endblock %}
-{% block title %}Giỏ Hàng
-{% endblock %}
+
+
+{% block title %}Giỏ Hàng{% endblock %}
 {% block content %}
 
 
@@ -52,13 +53,14 @@
                class="btn btn-danger" />
         </div>
         <br><br>
+        <a href="{{ url_for('bill') }}" class="bill">Hóa Đơn</a>
         {% else %}
             <a href="{{ url_for('login', next='cart') }}" class="pay">Đăng nhập để thanh toán</a>
         {% endif %}
     </div>
 {% else %}
-<p><i>Không có sản phẩm nào trong giỏ</i></p>
+    <p><i>Không có sản phẩm nào trong giỏ</i></p>
 {% endif %}
-
+<!--<a href="{{ url_for('bill') }}" class="bill">Hóa Đơn</a>-->
 {% endblock %}
 

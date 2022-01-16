@@ -53,6 +53,12 @@ def get_user_by_id(user_id):
     return User.query.get(user_id)
 
 
+def load_receipt(receipt_id):
+    receipt = Receipt.query.filter(receipt_id)
+
+    return receipt.all()
+
+
 def create_user(name, username, password, email=None, avatar=None):
     password = str(hashlib.md5(password.strip().encode('utf-8')).hexdigest())
     user = User(name=name.strip(),
@@ -68,6 +74,22 @@ def create_user(name, username, password, email=None, avatar=None):
         return False
     else:
         return True
+
+
+def update_book(name, quantity):
+    name = Product.query.filter(Product.name.__eq__(name.strip()))
+    if name:
+        quantity_1 = name.filter(Product.quantity.__eq__(quantity))
+        quantity = Product(quantity=quantity + quantity_1)
+
+        db.session.add(quantity)
+
+        try:
+            db.session.commit()
+        except:
+            return False
+        else:
+            return True
 
 
 def check_user(username, password, role=UserRole.USER):
@@ -149,3 +171,7 @@ def product_month_stats(year):
         .group_by(extract('month', Receipt.created_date)) \
         .order_by(extract('month', Receipt.created_date)) \
         .all()
+
+
+def input_book(product_id):
+    product = Product.query.filter(Product.id == product_id)

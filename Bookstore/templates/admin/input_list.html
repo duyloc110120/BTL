@@ -1,0 +1,51 @@
+{% extends 'admin/base.html' %}
+{% block body %}
+{% if current_user.is_authenticated and current_user.user_role.ADMIN %}
+
+<!---->
+{% block css %}
+   <link href="{{ url_for('static', filename='css/receipt.css') }}" rel="stylesheet" />
+{% endblock %}
+{% block content %}
+       <div class="card">
+            <div class="card-header">
+                Phiếu nhập sách
+            </div>
+
+            <!-- Card Body -->
+            <div class="card-body">
+                <form  method="post">
+                    <div class="form-input">
+                        <div class="form-flex">
+                            <label for="stt">STT</label>
+                            <input  name="stt" id="stt" class="form-controler" value="1">
+                        </div>
+                        <div class="form-flex">
+                            <label for="name">Sách</label>
+                            <input type="text" name="name" id="name" class="form-controler">
+                        </div>
+                        <div class="form-flex">
+                            <label for="cate">Thể loại</label>
+                            <input type="text" name="cate" id="cate" class="form-controler">
+                        </div>
+                        <div class="form-flex">
+                            <label for="author">Tác giả</label>
+                            <input type="text" name="author" id="author" class="form-controler">
+                        </div>
+                        <div class="form-flex">
+                            <label for="quantity">Số lượng</label>
+                            <input type="number" name="quantity" id="quantity" class="form-controler ">
+                        </div>
+                    </div>
+
+
+                    <input type="submit" value="Nhập sách" class="btn btn-danger nhapsach" />
+                </form>
+            </div>
+            <!-- End Card Body -->
+        </div>
+{% endblock %}
+
+{% endif %}
+
+{% endblock %}

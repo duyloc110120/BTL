@@ -8,3 +8,15 @@
     font-size: 16px;
     color :#000;
 }
+.bill{
+    display: inline-block;
+    padding: 12px 24px;
+    background: red;
+    color: #fff;
+    text-decoration: none;
+    margin-bottom: 150px;
+}
+
+span{
+    display: inline !important;
+}

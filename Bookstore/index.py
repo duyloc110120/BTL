@@ -8,8 +8,8 @@ from Bookstore.models import Product, Receipt, ReceiptDetail
 
 
 @app.route('/')
-@decorator.login_required
-# @decorator.manage_permission_required
+
+
 def home():
     cate_id = request.args.get('category_id')
     kw = request.args.get('keyword')
@@ -91,13 +91,14 @@ def register():
 
 
 @app.route('/logout')
+@decorator.login_required
 def logout():
     logout_user()
     return redirect(url_for('login'))
 
 
 @app.route('/cart')
-@login_required
+@decorator.login_required
 def cart():
     return render_template('cart.html', cart_stats=utils.cart_stats(session.get('cart')))
 
@@ -179,11 +180,9 @@ def pay():
         return jsonify({'code': 400})
 
 
-@app.route('/receipt')
-def receipt():
-    re_details = ReceiptDetail.query.all()
-
-    return render_template('receipt.html', re_datails=re_details)
+@app.route('/bill')
+def bill():
+    return render_template('bill.html')
 
 
 @loginn.user_loader

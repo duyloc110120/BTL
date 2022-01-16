@@ -1,0 +1,63 @@
+{% extends 'layout/base.html' %}
+{% block css %}
+   <link href="{{ url_for('static', filename='css/receipt.css') }}" rel="stylesheet" />
+{% endblock %}
+{% block title %}
+Hóa đơn bán sách
+{% endblock %}
+
+
+{% block content %}
+    <div class="container-fuild">
+
+
+        <!--Student list Card-->
+        <div class="card bill">
+            <div class="card-header text-center text-danger">
+                Hóa Đơn Bán Sách
+            </div>
+
+            <!-- Card Body -->
+            <div class="card-body">
+                <table class="table table-bordered text-center bill">
+                    <div class="info">
+
+                        <h4>Tên khách hàng :
+                            <span>{{ current_user.name }}</span>
+                        </h4>
+
+                        <h4>Ngày lập hóa đơn :
+                            <span></span>
+                        </h4>
+                    </div>
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Sách</th>
+
+                            <th>Số lượng</th>
+                            <th>Đơn giá</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for c in session['cart'].values() %}
+                        <tr>
+                            <td>{{ c.id }}</td>
+                            <td>{{ c.name }}</td>
+                            <td>{{ c.quantity }}</td>
+                            <td>{{ c.price }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                <h3>Tổng tiền : <span class="inline" id="amountId">{{ "{:,.0f}".format(cart_stats.total_amount) }}</span> VND</h3>
+            </div>
+            <!-- End Card Body -->
+        </div>
+        <!--End Card -->
+
+    </div>
+{% endblock %}

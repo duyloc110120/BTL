@@ -1,6 +1,6 @@
 from Bookstore import db, app, utils
 
-from Bookstore.models import User, UserRole, Category, Product
+from Bookstore.models import User, UserRole, Category, Product, ReceiptDetail
 from flask_admin.contrib.sqla import ModelView
 from flask_admin import BaseView, expose, Admin, AdminIndexView
 from flask_login import logout_user, current_user
@@ -15,9 +15,22 @@ class AdminAutheticatedView(ModelView):
 
 
 class ProductView(AdminAutheticatedView):
+    column_display_pk = True
+    can_view_details = True
     can_export = True
-    column_filters = ['name', 'price']
-    column_searchable_list = ['name']
+    can_create = True
+    can_delete = True
+    can_edit = True
+    column_filters = ['name', 'price', 'id']
+    column_labels = {
+        'id': 'Mã sản phẩm',
+        'name': 'Tên sản phẩm',
+        'description': 'Mô tả',
+        'price': 'Giá',
+        'image': 'Ảnh sản phẩm',
+        'quantity': 'Số lượng'
+    }
+    column_exclude_list = ['active', 'category', 'author', 'created_date']
 
 
 class LogoutView(BaseView):
@@ -53,6 +66,32 @@ class StatsView(BaseView):
                                                      to_date=to_date))
 
 
+class ReceiptView(BaseView):
+    @expose("/")
+    def index(self):
+        re_details = ReceiptDetail.query.all()
+
+        return self.render('admin/receipt.html', re_datails=re_details)
+
+
+class InputView(BaseView):
+    @expose("/", methods=['get', 'post'])
+    def index(self):
+        error_msg = ""
+        if request.method.__eq__('POST'):
+            try:
+                name = request.form.get('name')
+                quantity = request.form.get('quantity')
+
+                try:
+                    utils.update_book(name=name, quantity=quantity)
+                except Exception as ex:
+                    error_msg = str(ex)
+            except Exception as ex:
+                error_msg = str(ex)
+        return self.render('admin/input_list.html')
+
+
 class RegulationsView(AdminAutheticatedView):
     column_display_pk = True
     can_create = True
@@ -71,5 +110,7 @@ admin.add_view(AdminAutheticatedView(User, db.session))
 admin.add_view(AdminAutheticatedView(Category, db.session, name="Danh mục"))
 admin.add_view(ProductView(Product, db.session, name="Sản phẩm"))
 admin.add_view(StatsView(name="Thống Kê Báo Cáo"))
+admin.add_view(ReceiptView(name="Hóa đơn"))
+admin.add_view(InputView(name="Nhập sách"))
 # admin.add_view(AdminAutheticatedView(Regulation,db.session, name='Qui Định'))
 admin.add_view(LogoutView(name="Đăng Xuất"))

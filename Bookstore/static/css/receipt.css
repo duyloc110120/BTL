@@ -23,7 +23,7 @@
     border-radius: 12px;
 }
 span{
-    display: block;
+
     color: #888;
     font-size: 20px;
 }
@@ -35,3 +35,54 @@ span{
     background: linear-gradient(#373B44,#4286f4);
     border-radius: 15px;
 }
+
+.card.bill{
+    width: 1200px;
+    margin: 0 auto;
+    background-color: #fff;
+    box-shadow: rgba(100, 100, 111, .2)
+                0px 7px 29px 0px;
+}
+
+.info{
+    display: flex;
+
+    align-items: center;
+}
+.info h4{
+    flex: 1;
+}
+.info h4:first-child{
+    border-right: 2px solid #999;
+    margin-right: 40px;
+}
+.info span{
+    display: inline;
+}
+
+.form-input{
+    display: flex;
+    font-size: 18px;
+}
+.form-flex{
+    border: 1px solid #999;
+}
+.form-flex label{
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid #999;
+}
+.form-flex input{
+    text-align: center;
+    padding-left: 10px;
+    width: 100%;
+    border: none;
+}
+
+.form-flex input:focus{
+    outline: none;
+}
+.nhapsach{
+    width: 100%;
+  margin-top: 40px;
+    }
