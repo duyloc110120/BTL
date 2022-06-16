@@ -124,178 +124,178 @@ class ReceiptDetail(db.Model):
 
 if __name__ == '__main__':
     db.create_all()
-    # categories = [{
-    #     "id": 1,
-    #     "name": "Sách Kinh Tế - Kĩ Năng"
-    # }, {
-    #     "id": 2,
-    #     "name": "Sách Văn Học Việt Nam"
-    # }, {
-    #     "id": 3,
-    #     "name": "Sách Đời Sống "
-    # }, {
-    #     "id": 4,
-    #     "name": "Sách Thiếu Nhi"
-    # }, {
-    #     "id": 5,
-    #     "name": "Sách Giáo Dục Gia Đình"
-    # }, {
-    #     "id": 6,
-    #     "name": "Sách Lịch Sử"
-    # }, {
-    #     "id": 7,
-    #     "name": "Sách Văn Hóa Nghệ Thuật"
-    # }, {
-    #     "id": 8,
-    #     "name": "Sách Khoa Học - Triết Học"
-    # }, {
-    #     "id": 9,
-    #     "name": "Sách Tâm Linh Tôn Giáo"
-    # }, {
-    #     "id": 10,
-    #     "name": "Sách Y học- Thực Dưỡng"
-    # }]
-    #
-    # for c in categories:
-    #     cate = Category(id=c['id'], name=c['name'])
-    #     db.session.add(cate)
-    #
-    # db.session.commit()
+    categories = [{
+        "id": 1,
+        "name": "Sách Kinh Tế - Kĩ Năng"
+    }, {
+        "id": 2,
+        "name": "Sách Văn Học Việt Nam"
+    }, {
+        "id": 3,
+        "name": "Sách Đời Sống "
+    }, {
+        "id": 4,
+        "name": "Sách Thiếu Nhi"
+    }, {
+        "id": 5,
+        "name": "Sách Giáo Dục Gia Đình"
+    }, {
+        "id": 6,
+        "name": "Sách Lịch Sử"
+    }, {
+        "id": 7,
+        "name": "Sách Văn Hóa Nghệ Thuật"
+    }, {
+        "id": 8,
+        "name": "Sách Khoa Học - Triết Học"
+    }, {
+        "id": 9,
+        "name": "Sách Tâm Linh Tôn Giáo"
+    }, {
+        "id": 10,
+        "name": "Sách Y học- Thực Dưỡng"
+    }]
 
-    # authors = [{
-    #     "id": 1,
-    #     "name": "Max"
-    # }, {
-    #     "id": 2,
-    #     "name": "John"
-    # }, {
-    #     "id": 3,
-    #     "name": "Kid"
-    # }]
-    #
-    # for a in authors:
-    #     author = Author(id=a['id'], name=a['name'])
-    #     db.session.add(author)
-    #
-    # db.session.commit()
+    for c in categories:
+        cate = Category(id=c['id'], name=c['name'])
+        db.session.add(cate)
 
-    # products = [{
-    #     "id": 1,
-    #     "name": "Lập Kế Hoạch Kinh Doanh Hiệu Quả",
-    #     "description": "Lập Kế Hoạch Kinh Doanh Hiệu Quả",
-    #     "price": 120000,
-    #     "image": "images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg",
-    #     "created_date": "2017-12-12",
-    #     "quantity": 200,
-    #     "category_id": 1,
-    #     "author_id": 1
-    # }, {
-    #     "id": 2,
-    #     "name": "Ma Bùn Lưu Manh",
-    #     "description": "Ma Bùn Lưu Manh",
-    #     "price": 150000,
-    #     "image": "images/ma-bun-luu-manh.jpg",
-    #     "created_date": "2015-12-12",
-    #     "quantity": 600,
-    #     "category_id": 2,
-    #     "author_id": 2
-    # }, {
-    #     "id": 3,
-    #     "name": "Giao dịch mọi nơi , không chỉ là ngân hàng",
-    #     "description": "Giao Dịnh mọi nơi , không chỉ là ngân hàng",
-    #     "price": 100000,
-    #     "image": "images/bank-4.0.jpg",
-    #     "created_date": "2018-01-12",
-    #     "quantity": 300,
-    #     "category_id": 3,
-    #     "author_id": 1
-    # }, {
-    #
-    #     "id": 4,
-    #     "name": "Bộ sách 500 câu chuyện giáo dục",
-    #     "description": "Bộ sách 500 câu chuyện giáo dục",
-    #     "price": 80000,
-    #     "image": "images/bo-sach-500-cau-chuyen-dao-duc.jpg",
-    #     "created_date": "2015-06-01",
-    #     "quantity": 500,
-    #     "category_id": 5,
-    #     "author_id": 3
-    # }, {
-    #     "id": 5,
-    #     "name": "Những câu chuyện về tính lương thiện",
-    #     "description": "Những câu chuyện về tính lương thiện",
-    #     "price": 200000,
-    #     "image": "images/bo-sach-nhung-cau-chuyen-cho-con-thanh-nguoi-tu-te.jpg",
-    #     "created_date": "2021-06-04",
-    #     "quantity": 500,
-    #     "category_id": 3,
-    #     "author_id": 3
-    # }, {
-    #     "id": 6,
-    #     "name": "Cảm ơn vì đã được thương",
-    #     "description": "Cảm ơn vì đã được thương",
-    #     "price": 135000,
-    #     "image": "images/cam-on-vi-da-duoc-thuong.jpg",
-    #     "created_date": "2021-09-04",
-    #     "quantity": 500,
-    #     "category_id": 3,
-    #     "author_id": 2
-    # }, {
-    #     "id": 6,
-    #     "name": "Ăn xanh sống lành ",
-    #     "description": "Ăn xanh sống lành ",
-    #     "price": 100000,
-    #     "image": "images/combo-an-xanh-song-lanh.jpg",
-    #     "created_date": "2021-06-04",
-    #     "quantity": 500,
-    #     "category_id": 10,
-    #     "author_id": 3
-    # }, {
-    #     "id": 7,
-    #     "name": "Buổi sáng diệu kì",
-    #     "description": "Buổi sáng diệu kì",
-    #     "price": 110000,
-    #     "image": "images/combo-buoi-sang-dieu-ky.jpg",
-    #     "created_date": "2021-06-04",
-    #     "quantity": 300,
-    #     "category_id": 10,
-    #     "author_id": 1
-    # }, {
-    #     "id": 8,
-    #     "name": "Lược sử loài người",
-    #     "description": "Lược sử loài người",
-    #     "price": 1700000,
-    #     "image": "images/combo-luoc-su-loai-nguoi.jpg",
-    #     "created_date": "2021-06-04",
-    #     "quantity": 600,
-    #     "category_id": 6,
-    #     "author_id": 3
-    # }, {
-    #     "id": 9,
-    #     "name": "Mẹ con sư tử",
-    #     "description": "Mẹ con sư tử",
-    #     "price": 50000,
-    #     "image": "images/combo-me-con-su-tu-bo-tat-ngan-tay-ngan-mat.jpg",
-    #     "created_date": "2021-06-04",
-    #     "quantity": 100,
-    #     "category_id": 4,
-    #     "author_id": 2
-    # }, {
-    #     "id": 10,
-    #     "name": "Đường mây trên đất hoa",
-    #     "description": "Đường mây trên đất hoa",
-    #     "price": 130000,
-    #     "image": "images/duong-may-tren-dat-hoa.jpg",
-    #     "created_date": "2021-06-04",
-    #     "quantity": 200,
-    #     "category_id": 5,
-    #     "author_id": 3
-    # }]
-    #
-    # for p in products:
-    #     pro = Product(name=p['name'], price=p['price'], image=p['image'], quantity=p['quantity'],
-    #                   created_date=p['created_date'],
-    #                   description=p['description'], category_id=p['category_id'], author_id=p['author_id'])
-    #     db.session.add(pro)
-    #
-    # db.session.commit()
+    db.session.commit()
+
+    authors = [{
+        "id": 1,
+        "name": "Max"
+    }, {
+        "id": 2,
+        "name": "John"
+    }, {
+        "id": 3,
+        "name": "Kid"
+    }]
+
+    for a in authors:
+        author = Author(id=a['id'], name=a['name'])
+        db.session.add(author)
+
+    db.session.commit()
+
+    products = [{
+        "id": 1,
+        "name": "Lập Kế Hoạch Kinh Doanh Hiệu Quả",
+        "description": "Lập Kế Hoạch Kinh Doanh Hiệu Quả",
+        "price": 120000,
+        "image": "images/lap-ke-hoach-kinh-doanh-hieu-qua.jpg",
+        "created_date": "2017-12-12",
+        "quantity": 200,
+        "category_id": 1,
+        "author_id": 1
+    }, {
+        "id": 2,
+        "name": "Ma Bùn Lưu Manh",
+        "description": "Ma Bùn Lưu Manh",
+        "price": 150000,
+        "image": "images/ma-bun-luu-manh.jpg",
+        "created_date": "2015-12-12",
+        "quantity": 600,
+        "category_id": 2,
+        "author_id": 2
+    }, {
+        "id": 3,
+        "name": "Giao dịch mọi nơi , không chỉ là ngân hàng",
+        "description": "Giao Dịnh mọi nơi , không chỉ là ngân hàng",
+        "price": 100000,
+        "image": "images/bank-4.0.jpg",
+        "created_date": "2018-01-12",
+        "quantity": 300,
+        "category_id": 3,
+        "author_id": 1
+    }, {
+
+        "id": 4,
+        "name": "Bộ sách 500 câu chuyện giáo dục",
+        "description": "Bộ sách 500 câu chuyện giáo dục",
+        "price": 80000,
+        "image": "images/bo-sach-500-cau-chuyen-dao-duc.jpg",
+        "created_date": "2015-06-01",
+        "quantity": 500,
+        "category_id": 5,
+        "author_id": 3
+    }, {
+        "id": 5,
+        "name": "Những câu chuyện về tính lương thiện",
+        "description": "Những câu chuyện về tính lương thiện",
+        "price": 200000,
+        "image": "images/bo-sach-nhung-cau-chuyen-cho-con-thanh-nguoi-tu-te.jpg",
+        "created_date": "2021-06-04",
+        "quantity": 500,
+        "category_id": 3,
+        "author_id": 3
+    }, {
+        "id": 6,
+        "name": "Cảm ơn vì đã được thương",
+        "description": "Cảm ơn vì đã được thương",
+        "price": 135000,
+        "image": "images/cam-on-vi-da-duoc-thuong.jpg",
+        "created_date": "2021-09-04",
+        "quantity": 500,
+        "category_id": 3,
+        "author_id": 2
+    }, {
+        "id": 6,
+        "name": "Ăn xanh sống lành ",
+        "description": "Ăn xanh sống lành ",
+        "price": 100000,
+        "image": "images/combo-an-xanh-song-lanh.jpg",
+        "created_date": "2021-06-04",
+        "quantity": 500,
+        "category_id": 10,
+        "author_id": 3
+    }, {
+        "id": 7,
+        "name": "Buổi sáng diệu kì",
+        "description": "Buổi sáng diệu kì",
+        "price": 110000,
+        "image": "images/combo-buoi-sang-dieu-ky.jpg",
+        "created_date": "2021-06-04",
+        "quantity": 300,
+        "category_id": 10,
+        "author_id": 1
+    }, {
+        "id": 8,
+        "name": "Lược sử loài người",
+        "description": "Lược sử loài người",
+        "price": 1700000,
+        "image": "images/combo-luoc-su-loai-nguoi.jpg",
+        "created_date": "2021-06-04",
+        "quantity": 600,
+        "category_id": 6,
+        "author_id": 3
+    }, {
+        "id": 9,
+        "name": "Mẹ con sư tử",
+        "description": "Mẹ con sư tử",
+        "price": 50000,
+        "image": "images/combo-me-con-su-tu-bo-tat-ngan-tay-ngan-mat.jpg",
+        "created_date": "2021-06-04",
+        "quantity": 100,
+        "category_id": 4,
+        "author_id": 2
+    }, {
+        "id": 10,
+        "name": "Đường mây trên đất hoa",
+        "description": "Đường mây trên đất hoa",
+        "price": 130000,
+        "image": "images/duong-may-tren-dat-hoa.jpg",
+        "created_date": "2021-06-04",
+        "quantity": 200,
+        "category_id": 5,
+        "author_id": 3
+    }]
+
+    for p in products:
+        pro = Product(name=p['name'], price=p['price'], image=p['image'], quantity=p['quantity'],
+                      created_date=p['created_date'],
+                      description=p['description'], category_id=p['category_id'], author_id=p['author_id'])
+        db.session.add(pro)
+
+    db.session.commit()
